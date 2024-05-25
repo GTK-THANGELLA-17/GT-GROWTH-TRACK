@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Postings</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-ZWMTyqjA3DM/CNOA1fuDi8AC2cqGl2mmlK7Kh0tCLm6iJc8tqoqPKXv5nrvcg9/zQiwKPJf6V+nVDHrRSHihRA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+           background: #e3e3e3;
+            margin: 0;
+        }
+
+        header {
+            background: linear-gradient(114.9deg, rgb(34, 34, 34) 8.3%, rgb(0, 40, 60) 41.6%, rgb(0, 143, 213) 93.4%);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header i {
+            margin-left: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .my-4 {
+            margin-top: 2rem !important;
+            margin-bottom: 2rem !important;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .job-listing {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: white;
+            margin-bottom: 20px;
+            box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .job-listing:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .job-title {
+            font-size: 1.25em;
+            margin-bottom: 10px;
+            color: #343a40;
+            display: flex;
+            align-items: center;
+        }
+
+        .job-title i {
+            margin-right: 10px;
+        }
+
+        .job-company {
+            font-size: 1.1em;
+            color: #6c757d;
+            font-weight: bold;
+        }
+
+        .highlighted {
+            background-color: yellow;
+            font-weight: bold;
+        }
+
+        .job-posted-date,
+        .job-last-date {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .job-location {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .job-description {
+            flex-grow: 1;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #343a40;
+        }
+
+        .apply-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 0.9em;
+        }
+
+        .apply-button:hover {
+            background-color: #0056b3;
+        }
+
+        .category {
+            margin-top: 40px;
+        }
+
+        .category-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+            margin-top: 50px;
+        }
+
+        .category-icon {
+            margin-right: 10px;
+        }
+
+        .job-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .job-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+.navbar {
+    background: none; /* Remove background */
+}
+
+.navbar-nav {
+    justify-content: center; /* Center align navigation items */
+}
+
+.navbar-nav .nav-item {
+    margin: 0 10px; /* Adjust margin between navigation items if needed */
+}
+.navbar.navbar-expand-lg .navbar-nav .nav-link {
+    color: black;
+    font-size: 18px;
+}
+
+
+/* Example of a media query for smaller devices */
+@media (max-width: 768px) {
+    /* CSS rules for smaller screens */
+}
+
+    </style>
+</head>
+
+<body>
+<section id="home">
+    <header class="bg-dark text-white text-center py-4">
+        <h1>GT GROWTHTRACK <i class="fas fa-briefcase"></i></h1>
+    </header>
+</section>
+
+<!-- Navigation bar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#jobs">Browse Jobs</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <section id="about" class="about-section text-center">
+        <div class="container">
+            <h2 style="font-family: Impact, Charcoal, sans-serif;">GT GROWTH TRACK: UNLEASHING OPPORTUNITIES</h2>
+            <p>
+               WELCOME TO GTGROWTHTRACK! EMBRACE THE JOURNEY OF **GROWTH** AND **SUCCESS** WITH US. OUR PLATFORM IS YOUR GATEWAY TO UNLEASHING OPPORTUNITIES. **DISCOVER** YOUR NEXT CAREER MOVE BY **NAVIGATING** THROUGH A DIVERSE RANGE OF JOB LISTINGS. **FILTER** THEM EFFORTLESSLY BY COMPANY, LOCATION, SKILL, AND JOB ROLE. **EMPOWER** YOURSELF TO TAKE CONTROL OF YOUR PROFESSIONAL DESTINY TODAY!
+            </p>
+        </div>
+    </section>
+
+
+<section id="jobs">
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-md-3">
+                <label for="categorySelect">Select Category:</label>
+                <select id="categorySelect" class="form-control">
+                    <option value="all">All</option>
+                    <option value="software-engineering">Software Engineering</option>
+                    <option value="product-management">Product Management</option>
+                    <option value="data-science">Data Science</option>
+                    <option value="design">Design</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="developer">Game Developer</option>
+                    <option value="designer">Game Designer</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="companySelect">Select Company:</label>
+                <select id="companySelect" class="form-control">
+                    <option value="all">All</option>
+                    <option value="Google">Google</option>
+                    <option value="PwC">PwC</option>
+                    <option value="Microsoft">Microsoft</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Nvidia">Nvidia</option>
+                    <option value="Riot Games">Riot Games</option>
+                    <option value="Rockstar Games">Rockstar Games</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="locationSelect">Select Location:</label>
+                <select id="locationSelect" class="form-control">
+                    <option value="all">All</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Mumbai">Mumbai</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="skillSelect">Select Skill:</label>
+                <select id="skillSelect" class="form-control">
+                    <option value="all">All</option>
+                  
+                </select>
+            </div>
+        </div>
+
+        <div id="job-container" class="job-container">
+            <!-- Job listings will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="jobModal" tabindex="-1" role="dialog" aria-labelledby="jobModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="jobModalLabel">Job Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="job-company">Company Name</p>
+                    <p id="job-posted-date">Posted Date: </p>
+                    <p id="job-last-date">Last Date: </p>
+                    <p id="job-location">Location: </p>
+                    <p id="job-description"></p>
+                    <p><strong>Requirements:</strong></p>
+                    <ul id="job-requirements" role="list"></ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="company-site" class="btn btn-info" role="button" target="_blank">Know About the Company</a>
+                    <a href="#" id="company-linkedin" class="btn btn-primary" role="button" target="_blank">Company LinkedIn</a>
+                    <a href="#" id="apply-link" class="btn btn-success" role="button" target="_blank">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Job Postings. All rights reserved.</p>
+        <p>Designed and Built By G.Thangella.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const jobs = [
+    {
+        title: "Software Engineer",
+        description: "We are looking for a skilled software engineer with 3+ years of experience in full-stack development.",
+        requirements: [
+            "Proficiency in JavaScript, HTML, and CSS",
+            "Experience with React and Node.js",
+            "Strong problem-solving skills"
+        ],
+        category: "software-engineering",
+        company: "Google",
+        location: "Hyderabad",
+        companyWebsite: "https://careers.google.com/jobs/results/",
+        companyLinkedIn: "https://www.linkedin.com/company/google/",
+        postedDate: "2024-05-20",
+        lastDate: "2024-06-10"
+    },
+    {
+        title: "Product Manager",
+        description: "We need an experienced product manager to lead our product development teams.",
+        requirements: [
+            "Proven track record of managing successful products",
+            "Strong leadership and communication skills",
+            "Experience with Agile methodologies"
+        ],
+        category: "product-management",
+        company: "PwC",
+        location: "Mumbai",
+        companyWebsite: "https://www.pwc.com/gx/en/careers.html",
+        companyLinkedIn: "https://www.linkedin.com/company/pwc/",
+        postedDate: "2024-05-22",
+        lastDate: "2024-06-12"
+    },
+    {
+        title: "Data Scientist",
+        description: "Looking for a data scientist with a strong background in statistical analysis and machine learning.",
+        requirements: [
+            "Experience with Python and R",
+            "Knowledge of machine learning algorithms",
+            "Strong analytical skills"
+        ],
+        category: "data-science",
+        company: "Microsoft",
+        location: "Hyderabad",
+        companyWebsite: "https://careers.microsoft.com/",
+        companyLinkedIn: "https://www.linkedin.com/company/microsoft/",
+        postedDate: "2024-05-25",
+        lastDate: "2024-06-15"
+    },
+    {
+        title: "UI/UX Designer",
+        description: "Seeking a creative UI/UX designer with experience in creating user-centered designs.",
+        requirements: [
+            "Proficiency in design software (e.g., Sketch, Adobe XD)",
+            "Strong portfolio of design projects",
+            "Excellent communication and teamwork skills"
+        ],
+        category: "design",
+        company: "Apple",
+        location: "Mumbai",
+        companyWebsite: "https://www.apple.com/jobs/",
+        companyLinkedIn: "https://www.linkedin.com/company/apple/",
+        postedDate: "2024-05-27",
+        lastDate: "2024-06-17"
+    },
+    {
+        title: "Marketing Specialist",
+        description: "Looking for a marketing specialist to help drive our digital marketing efforts.",
+        requirements: [
+            "Experience with SEO, SEM, and PPC",
+            "Strong analytical and project management skills",
+            "Excellent written and verbal communication skills"
+        ],
+        category: "marketing",
+        company: "Nvidia",
+        location: "Hyderabad",
+        companyWebsite: "https://www.nvidia.com/en-us/about-nvidia/careers/",
+        companyLinkedIn: "https://www.linkedin.com/company/nvidia/",
+        postedDate: "2024-05-30",
+        lastDate: "2024-06-20"
+    },
+    {
+        title: "Game Developer",
+        description: "Looking for a Game Developer",
+        requirements: [
+            "Experience with game engines such as Unity or Unreal",
+            "Proficiency in C++ or C#",
+            "Strong problem-solving and debugging skills"
+        ],
+        category: "developer",
+        company: "Riot Games",
+        location: "Mumbai",
+        companyWebsite: "https://www.riotgames.com/en/work-with-us/jobs",
+        companyLinkedIn: "https://www.linkedin.com/company/riot-games/",
+        postedDate: "2024-05-30",
+        lastDate: "2024-06-20"
+    },
+    {
+        title: "Game Designer",
+        description: "Looking for a Game Designer",
+        requirements: [
+            "Experience in game design and development",
+            "Strong understanding of game mechanics and user experience",
+            "Proficiency in design software"
+        ],
+        category: "designer",
+        company: "Rockstar Games",
+        location: "Mumbai",
+        companyWebsite: "https://www.rockstargames.com/careers",
+        companyLinkedIn: "https://www.linkedin.com/company/rockstar-games/",
+        postedDate: "2024-05-30",
+        lastDate: "2024-06-20"
+    }
+];
+
+// Function to create job listing element
+function createJobElement(job) {
+    const jobElement = document.createElement('div');
+    jobElement.className = 'job-listing fade-in';
+
+    jobElement.innerHTML = `
+        <div class="job-title"><i class="fas fa-briefcase"></i> ${job.title}</div>
+        <div class="job-company"><i class="fas fa-building"></i> ${job.company}</div>
+        <div class="job-posted-date"><i class="fas fa-calendar-alt"></i> Posted: ${job.postedDate}</div>
+        <div class="job-last-date"><i class="fas fa-calendar-times"></i> Last Date: ${job.lastDate}</div>
+        <div class="job-location"><i class="fas fa-map-marker-alt"></i> Location: ${job.location}</div>
+        <div class="job-description">${job.description}</div>
+        <button class="apply-button" data-toggle="modal" data-target="#jobModal" data-index="${jobs.indexOf(job)}">View Details</button>
+    `;
+
+    return jobElement;
+}
+
+// Function to display all jobs initially
+function displayAllJobs() {
+    displayJobs('all', 'all', 'all', 'all');
+}
+
+// Function to display jobs based on category, company, location, and skill
+function displayJobs(category, company, location, skill) {
+    const jobContainer = document.getElementById('job-container');
+    jobContainer.innerHTML = '';
+
+    const filteredJobs = jobs.filter(job => {
+        if (category !== 'all' && job.category !== category) return false;
+        if (company !== 'all' && job.company !== company) return false;
+        if (location !== 'all' && job.location !== location) return false;
+        if (skill !== 'all' && !job.requirements.includes(skill)) return false;
+        return true;
+    });
+
+    if (filteredJobs.length === 0) {
+        jobContainer.innerHTML = '<p>No jobs found matching the selected criteria.</p>';
+    } else {
+        filteredJobs.forEach(job => {
+            const jobElement = createJobElement(job);
+            jobContainer.appendChild(jobElement);
+        });
+    }
+}
+// Event listener for category select
+document.getElementById('categorySelect').addEventListener('change', function () {
+    const category = this.value;
+    const company = document.getElementById('companySelect').value;
+    const location = document.getElementById('locationSelect').value;
+    const skill = document.getElementById('skillSelect').value;
+    displayJobs(category, company, location, skill);
+});
+
+// Event listener for company select
+document.getElementById('companySelect').addEventListener('change', function () {
+    const category = document.getElementById('categorySelect').value;
+    const company = this.value;
+    const location = document.getElementById('locationSelect').value;
+    const skill = document.getElementById('skillSelect').value;
+    displayJobs(category, company, location, skill);
+});
+
+// Event listener for location select
+document.getElementById('locationSelect').addEventListener('change', function () {
+    const category = document.getElementById('categorySelect').value;
+    const company = document.getElementById('companySelect').value;
+    const location = this.value;
+    const skill = document.getElementById('skillSelect').value;
+    displayJobs(category, company, location, skill);
+});
+
+// Event listener for skill select
+document.getElementById('skillSelect').addEventListener('change', function () {
+    const skill = this.value;
+    const category = document.getElementById('categorySelect').value;
+    const company = document.getElementById('companySelect').value;
+    const location = document.getElementById('locationSelect').value;
+
+    if (skill !== 'all') {
+        displayJobs(category, company, location, skill);
+    } else {
+        displayJobs(category, company, location, 'all');
+    }
+});
+
+
+// Function to populate skills dropdown
+function populateSkillsDropdown() {
+    const skillsSelect = document.getElementById('skillSelect');
+    const allSkills = jobs.reduce((acc, job) => {
+        job.requirements.forEach(skill => {
+            if (!acc.includes(skill)) {
+                acc.push(skill);
+            }
+        });
+        return acc;
+    }, []);
+    allSkills.sort(); // Sort the skills alphabetically
+    allSkills.forEach(skill => {
+        const option = document.createElement('option');
+        option.value = skill;
+        option.textContent = skill;
+        skillsSelect.appendChild(option);
+    });
+}
+
+// Call the function to populate skills dropdown
+populateSkillsDropdown();
+
+// Event listener for modal
+$('#jobModal').on('show.bs.modal', function (event) {
+    const button = $(event.relatedTarget); // Button that triggered the modal
+    const index = button.data('index'); // Extract info from data-* attributes
+    const job = jobs[index];
+    const modal = $(this);
+    modal.find('.modal-title').text(job.title);
+    modal.find('.modal-body #job-company').text('Company: ' + job.company);
+    modal.find('.modal-body #job-posted-date').text('Posted Date: ' + job.postedDate);
+    modal.find('.modal-body #job-last-date').text('Last Date: ' + job.lastDate);
+    modal.find('.modal-body #job-location').text('Location: ' + job.location);
+    modal.find('.modal-body #job-description').text(job.description);
+    const requirementsList = modal.find('.modal-body #job-requirements');
+    requirementsList.empty();
+    job.requirements.forEach(req => {
+        requirementsList.append(`<li>${req}</li>`);
+    });
+
+    // Update Apply Now button with click event listener
+    const applyButton = modal.find('.modal-footer #apply-link');
+    applyButton.attr('href', job.companyWebsite).text('Apply Now');
+    applyButton.off('click').on('click', function(event) {
+        event.preventDefault(); // Prevent default behavior
+        window.open(job.companyWebsite, '_blank'); // Open the link in a new tab
+    });
+
+    modal.find('.modal-footer #company-linkedin').attr('href', job.companyLinkedIn);
+});
+
+// Call function to display all jobs initially
+displayAllJobs();
+
+</script>
+</body>
+
+</html>
